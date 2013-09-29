@@ -55,6 +55,45 @@ readAniInfoFromSGFFormat = (pathToImgFile, callback)->
 
     logger.log "[texture-info::readAniInfoFromSGFFormat] amfLen:#{amfLen}, canvasWidth:#{canvasWidth}, canvasHeight:#{canvasHeight}, regPointX:#{regPointX}, regPointY:#{regPointY}"
 
+    # 每帧动画在png压缩画布上的 x,y,w,h
+    assetRects = []
+
+    # 每帧动画在原尺寸画布上的 x,y,w,h
+    originalRects = []
+
+    yScroll = 0
+    for i in [0...assetFrameNum] by 1
+      left = bytearray.readShort buf
+      top = bytearray.readShort  buf
+      width = bytearray.readShort buf
+      height = bytearray.readShort buf
+
+      originalRects.push
+        left : left
+        top : top
+        width : width
+        height : height
+
+      assetRects.push
+        left : 0
+        top : yScroll
+        width : width
+        height : height
+
+      yScroll += height
+
+    result =
+      canvasWidth : canvasWidth
+      canvasHeight : canvasHeight
+      regPointX : regPointX
+      regPointY : regPointY
+      assetFrameNum : assetFrameNum
+      assetRects : assetRects
+      originalRects : originalRects
+
+    callback null, result
+    return
+
 # check the given image
 # @param {String} pathToImgFile
 # @param {Funcation} callback signature: callback(err, infoData)->
