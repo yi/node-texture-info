@@ -26,15 +26,34 @@ readAniInfoFromSGFFormat = (pathToImgFile, callback)->
       callback(err)
       return
 
+    # verify sgf file signature
     signature = bytearray.readUTFBytes(buf, SGF_FILE_SIGNATURE.length, buf.length - SGF_FILE_SIGNATURE.length)
     logger.log "[texture-info::readAniInfoFromSGFFormat] signature:#{signature}"
 
     unless signature is SGF_FILE_SIGNATURE
       err = "verification failed"
-      logger.error "[texture-info::readAniInfoFromSGFFormat] #{err}"
-      callback(err)
+      logger.log "[texture-info::readAniInfoFromSGFFormat] #{err}"
+      callback()
+      # NOTE:
+      #   当文件中不包含sgf 签名的适合，不被认为是异常
+      # ty 2013-09-29
       return
 
+    # calc the read starting position
+    buf.position = buf.position - 4 - SGF_FILE_SIGNATURE.length
+    amfLen = bytearray.readUnsignedInt(buf)
+    buf.position = buf.position - 4 - amfLen
+
+    # 开始读取具体数据
+    canvasWidth = bytearray.readUnsignedShort(buf)
+    canvasHeight= bytearray.readUnsignedShort(buf)
+
+    # 美术编辑时设定的 坐标点 */
+    regPointX = bytearray.readShort buf
+    regPointY = bytearray.readShort buf
+    assetFrameNum = bytearray.readUnsignedShort buf
+
+    logger.log "[texture-info::readAniInfoFromSGFFormat] amfLen:#{amfLen}, canvasWidth:#{canvasWidth}, canvasHeight:#{canvasHeight}, regPointX:#{regPointX}, regPointY:#{regPointY}"
 
 # check the given image
 # @param {String} pathToImgFile

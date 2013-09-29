@@ -8,25 +8,17 @@
 # Licensed under the MIT license.
 ##
 
+path = require "path"
 fs = require "fs"
-p = require "commander"
+#p = require "commander"
 logger = require "dev-logger"
 _ = require "underscore"
 texture_info = require "../lib/texture-info"
 
-## settings scarfollding
+pathToFile = process.argv[2]
+console.log "input file : #{pathToFile}"
 
-settings =
-
-## updating args
-p.version('0.1.0')
-  .option('-f, --input-file <FILE>', 'path to image file to be checked')
-  .parse(process.argv)
-
-#logger.setLevel(if settings.VERBOSE then logger.LOG else logger.INFO)
-#console.log settings
-
-texture_info.check p.inputFile, (err, info)->
+texture_info.check pathToFile, (err, info)->
   if err?
     logger.error "[texture-info::check] #{err}"
   else
