@@ -23,6 +23,7 @@ texture_info.check pathToFile, (err, info)->
     logger.error "[texture-info::check] #{err}"
   else
     console.dir info
+  process.exit()
 
 
 

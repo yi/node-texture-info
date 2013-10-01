@@ -122,8 +122,12 @@ exports.check = (pathToImgFile, callback)->
               err = "fail to read sgf info, error:#{err}"
               callback(err)
             else
-              sgfInfo["sourceImage"] = imgInfo if sgfInfo?
-              callback null, if sgfInfo? then sgfInfo else imgInfo
+              if sgfInfo?
+                sgfInfo["sourceImage"] = imgInfo
+                sgfInfo["format"] = "SGF ANIMATION"
+                callback null, sgfInfo
+              else
+                callback imgInfo
         else
           return imgInfo
 
