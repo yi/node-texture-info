@@ -1,27 +1,29 @@
 # texture-info
 
-A image infomation reader tool written in Node.JS
+An image infomation reader tool for a set of custom image formats
 
-## Getting Started
-Install the module with: `npm install texture-info`
-
-```javascript
-var texture_info = require('texture-info');
-texture_info.awesome(); // "awesome"
+## Install
+```bash
+npm install coffee-script texture-info -g
 ```
 
-## Documentation
-_(Coming soon)_
+## Usage
 
-## Examples
-_(Coming soon)_
+Use in command line
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+```bash
+texture-info input.img
+```
 
-## Release History
-_(Nothing yet)_
+Use in JavaScript/CoffeeScript
+```coffee
+texture_info.check pathToFile, (err, info)->
+  if err?
+    logger.error "[texture-info::check] #{err}"
+  else
+    console.dir info
+```
 
 ## License
-Copyright (c) 2013 yi  
+Copyright (c) 2013 yi
 Licensed under the MIT license.
