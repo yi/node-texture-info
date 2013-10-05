@@ -16,6 +16,11 @@ _ = require "underscore"
 texture_info = require "../lib/texture-info"
 
 pathToFile = process.argv[2]
+
+unless _.isString(pathToFile) and pathToFile.length > 0
+  console.log "Usage: texture_info path_to_image_file"
+  process.exit()
+
 console.log "input file : #{pathToFile}"
 
 texture_info.check pathToFile, (err, info)->

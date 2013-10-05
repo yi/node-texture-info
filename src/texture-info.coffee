@@ -114,7 +114,7 @@ exports.check = (pathToImgFile, callback)->
       callback(err)
       return
     else
-      console.dir imgInfo
+      #console.dir imgInfo
       switch imgInfo.format
         when 'PNG'
           readAniInfoFromSGFFormat pathToImgFile, (err, sgfInfo)->
