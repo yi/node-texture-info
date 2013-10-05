@@ -19,6 +19,9 @@ SGF_FILE_SIGNATURE = "SGF-asset"
 # 串行化成二进制流时的数据签名
 SGF_SERIALISED_BA_SIGNATURE = 50807718
 
+FORMAT_SGF_ANIMATION = "SGF ANIMATION"
+
+
 readAniInfoFromSGFFormat = (pathToImgFile, callback)->
   fs.readFile pathToImgFile, (err, buf)->
     if err?
@@ -124,7 +127,7 @@ exports.check = (pathToImgFile, callback)->
             else
               if sgfInfo?
                 sgfInfo["sourceImage"] = imgInfo
-                sgfInfo["format"] = "SGF ANIMATION"
+                sgfInfo["format"] = FORMAT_SGF_ANIMATION
                 callback null, sgfInfo
               else
                 callback null, imgInfo
@@ -133,3 +136,20 @@ exports.check = (pathToImgFile, callback)->
           return
 
   return
+
+
+# check the given image
+# @param {String} pathToImgFile
+# @param {Funcation} callback signature: callback(err, result:Boolean)->
+exports.isSGFAnimation = (pathToImgFile, callback)->
+  exports.check pathToImgFile, (err, infoData)->
+    console.dir infoData
+
+    if err?
+      callback(err)
+    else
+      callback null, infoData["format"] is FORMAT_SGF_ANIMATION
+
+
+
+

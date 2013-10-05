@@ -1,7 +1,7 @@
 {
   "name": "texture-info",
   "description": "An image infomation reader tool for a set of custom image formats",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "homepage": "https://github.com/yi/node-texture-info",
   "author": {
     "name": "yi",
@@ -28,7 +28,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "na"
+    "test": "mocha tests/texture-info_test.js"
   },
   "dependencies" : {
     "dev-logger": ">=0.1.0",
