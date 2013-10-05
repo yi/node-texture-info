@@ -9,7 +9,7 @@
 fs = require 'fs'
 gm = require 'gm'
 bytearray = require "bytearray"
-logger = require 'dev-logger'
+#logger = require 'dev-logger'
 _ = require "underscore"
 
 
@@ -31,11 +31,11 @@ readAniInfoFromSGFFormat = (pathToImgFile, callback)->
 
     # verify sgf file signature
     signature = bytearray.readUTFBytes(buf, SGF_FILE_SIGNATURE.length, buf.length - SGF_FILE_SIGNATURE.length)
-    logger.log "[texture-info::readAniInfoFromSGFFormat] signature:#{signature}"
+    #logger.log "[texture-info::readAniInfoFromSGFFormat] signature:#{signature}"
 
     unless signature is SGF_FILE_SIGNATURE
       err = "verification failed"
-      logger.log "[texture-info::readAniInfoFromSGFFormat] #{err}"
+      #logger.log "[texture-info::readAniInfoFromSGFFormat] #{err}"
       callback()
       # NOTE:
       #   当文件中不包含sgf 签名的适合，不被认为是异常
@@ -56,7 +56,7 @@ readAniInfoFromSGFFormat = (pathToImgFile, callback)->
     regPointY = bytearray.readShort buf
     assetFrameNum = bytearray.readUnsignedShort buf
 
-    logger.log "[texture-info::readAniInfoFromSGFFormat] amfLen:#{amfLen}, canvasWidth:#{canvasWidth}, canvasHeight:#{canvasHeight}, regPointX:#{regPointX}, regPointY:#{regPointY}"
+    #logger.log "[texture-info::readAniInfoFromSGFFormat] amfLen:#{amfLen}, canvasWidth:#{canvasWidth}, canvasHeight:#{canvasHeight}, regPointX:#{regPointX}, regPointY:#{regPointY}"
 
     # 每帧动画在png压缩画布上的 x,y,w,h
     assetRects = []
@@ -143,7 +143,7 @@ exports.check = (pathToImgFile, callback)->
 # @param {Funcation} callback signature: callback(err, result:Boolean)->
 exports.isSGFAnimation = (pathToImgFile, callback)->
   exports.check pathToImgFile, (err, infoData)->
-    console.dir infoData
+    #console.dir infoData
 
     if err?
       callback(err)
