@@ -1,7 +1,7 @@
 {
   "name": "texture-info",
   "description": "An image infomation reader tool for a set of custom image formats",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/yi/node-texture-info",
   "author": {
     "name": "yi",

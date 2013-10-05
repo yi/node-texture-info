@@ -127,9 +127,9 @@ exports.check = (pathToImgFile, callback)->
                 sgfInfo["format"] = "SGF ANIMATION"
                 callback null, sgfInfo
               else
-                callback imgInfo
+                callback null, imgInfo
         else
-          callback imgInfo
+          callback null, imgInfo
           return
 
   return
