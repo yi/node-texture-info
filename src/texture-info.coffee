@@ -129,6 +129,7 @@ exports.check = (pathToImgFile, callback)->
               else
                 callback imgInfo
         else
-          return imgInfo
+          callback imgInfo
+          return
 
   return
