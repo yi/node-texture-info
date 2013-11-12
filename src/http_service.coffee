@@ -16,6 +16,7 @@ app.get '/', (req, res)->
 
 app.post '/', (req, res, next)->
 
+  console.log "[http_service::post] req.files"
   console.dir req.files
 
   try
@@ -31,22 +32,14 @@ app.post '/', (req, res, next)->
       res.send
         'success' : false
         'msg' : "ERROR: #{err}"
+      return
 
-    else
-      res.send
-        'success' : true
-        'info' : info
-      #res.send(format('%j', info))
+    console.log "[http_service::post] texture-info:"
+    console.dir info
 
-  #res.send(format('\n lalal uploaded %s (%d Kb) to %s as %s' , req.files.image.name , req.files.image.size / 1024 | 0 , req.files.image.path , req.body.title))
-
-
-
-#app.get "/", (req, res)->
-  #res.send "web service for sgf texture-info, please post to /exame"
-
-#app.post "/exame", (req, res)->
-  #res.send "web service for sgf texture-info"
+    res.send
+      'success' : true
+      'info' : info
 
 app.listen 3030
 console.log "[http_service] service start at 3030"
