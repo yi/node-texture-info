@@ -8,7 +8,13 @@
 
     <script type="text/javascript">
 
-      swfobject.embedSWF("./imgs/CombineSgfFile.swf", "uploader", "300", "120", "9.0.0","/imgs/expressInstall.swf", {postUrl:"/"}, {menu:"false"});
+      swfobject.embedSWF("./imgs/CombineSgfFile.swf", "uploader", "300", "120", "9.0.0","/imgs/expressInstall.swf", {'postUrl':"/", 'debug':false}, {menu:"false"});
+
+      function upload_response(jsonString){
+        console.log("upload_response");
+        console.dir(jsonString);
+      }
+
 
     </script>
 
