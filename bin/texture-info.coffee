@@ -15,9 +15,10 @@ _ = require "underscore"
 texture_info = require "../lib/texture-info"
 async = require "async"
 child_process = require 'child_process'
+pkg = require "../package"
 
 ## 更新外部配置
-p.version('0.0.1')
+p.version(pkg.version)
   .option('-o, --output [VALUE]', 'output directory')
   .option('-i, --input [VALUE]', 'input file')
   .parse(process.argv)
