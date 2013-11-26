@@ -4,7 +4,9 @@ An image infomation reader tool for a set of custom image formats
 
 ## Install
 ```bash
-npm install coffee-script texture-info -g
+sudo npm install coffee-script -g
+# 这个项目已经被切换成私有项目，因此请从目录本地安装
+sudo npm install . -g
 ```
 
 ## Usage
