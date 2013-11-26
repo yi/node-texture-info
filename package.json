@@ -33,11 +33,12 @@
     "test": "mocha tests/texture-info_test.js"
   },
   "dependencies" : {
-    "commander": "~1.0.1",
-    "underscore": ">=1.3.3",
-    "express": "3.x",
-   "bytearray": ">=0.1.1",
-    "gm": ">=1.9.0"
+    "commander": "latest",
+    "underscore": "latest",
+    "express": "latest",
+    "bytearray": "latest",
+    "gm": "latest",
+    "async": "latest"
   },
   "devDependencies": {
     "dev-logger": ">=0.1.0",
