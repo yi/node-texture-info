@@ -21,6 +21,7 @@ pkg = require "../package"
 p.version(pkg.version)
   .option('-o, --output [VALUE]', 'output directory')
   .option('-i, --input [VALUE]', 'input file')
+  .option('-c, --forceRegPointToCenter', 'only work with -i switcher, when this switcher is turned on, the output image will use forced register point at the middle of the canvas')
   .parse(process.argv)
 
 
@@ -33,7 +34,7 @@ rectToGeom = (rect)->
   "#{rect.width}x#{rect.height}#{left}#{top}"
 
 unless _.isString(p.input) and p.input.length > 0
-  console.log "Usage: texture_info -i path_to_image_file [-o output directory]"
+  console.log "Usage: texture_info -i path_to_image_file [-o output directory [-c force register point to middle center]]"
   process.exit()
 
 console.log "input file : #{p.input}"
@@ -71,6 +72,21 @@ texture_info.check p.input, (err, info)->
   basename = path.basename(p.input, (path.extname(p.input)))
 
   pathToSgfFile = path.relative p.output, p.input
+
+
+  if p.forceRegPointToCenter and (info.regPointX isnt info.canvasWidth/2 or info.regPointY isnt info.canvasHeight/2)
+    console.log "(-c) force register point to the middle of canvas."
+    offsetX = info.canvasWidth/2 - info.regPointX
+    offsetY = info.canvasHeight/2 - info.regPointY
+
+    console.log "offsetX:#{offsetX}, offsetY:#{offsetY}"
+
+    for originalRect in originalRects
+      originalRect.left += offsetX
+      originalRect.top += offsetY
+
+    console.log "adjusted originalRects:"
+    console.dir originalRects
 
   async.eachSeries assetRects, (assetRect, callback)->
     index = assetRects.indexOf assetRect
